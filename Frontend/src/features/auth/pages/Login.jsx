@@ -8,7 +8,7 @@ const Login = () => {
     }
   return (
     <main>
-        <div className='from-container'>
+        <div className='form-container'>
             <h1>Login</h1>
 
             <form onSubmit={handleSubmit}>
