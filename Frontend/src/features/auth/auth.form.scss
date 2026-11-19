@@ -2,6 +2,8 @@ main{
     min-width: 100vh;
     width: 100%;
 
+    margin-top: 150px;
+
     display: flex;
     justify-content: center;
     align-items: center;
@@ -33,5 +35,8 @@ main{
             border-radius: 0.75rem;
         }
     }
-    
+    a{
+        color: #e1034d;
+        text-decoration: none;
+    }
 }
