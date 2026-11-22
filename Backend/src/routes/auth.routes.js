@@ -1,5 +1,5 @@
 const { Router } = require('express')
-const authController = require("../cotrollers/auth.controller")
+const authController = require("../controllers/auth.controller")
 const authMiddleware = require("../middlewares/auth.middleware")
 
 const authRouter = Router()
@@ -31,9 +31,9 @@ authRouter.get("/logout", authController.logoutUserController)
 /**
  * @route GET /api/auth/get-me
  * @description get the current logged in user details
- * @access public (returns user: null when no session exists)
+ * @access private
  */
-authRouter.get("/get-me", authMiddleware.authUserOptional, authController.getMeController)
+authRouter.get("/get-me", authMiddleware.authUser, authController.getMeController)
 
 
 module.exports = authRouter
