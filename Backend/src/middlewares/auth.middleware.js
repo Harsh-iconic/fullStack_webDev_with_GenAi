@@ -39,5 +39,29 @@ async function authUser(req, res, next) {
 
 }
 
+// Session bootstrap is allowed without a cookie. Protected routes should keep
+// using authUser so they continue to return 401 for unauthenticated requests.
+async function authUserOptional(req, res, next) {
+    const token = req.cookies.token
 
-module.exports = { authUser }
+    if (!token) {
+        req.user = null
+        return next()
+    }
+
+    try {
+        const isTokenBlacklisted = await tokenBlacklistModel.findOne({ token })
+        if (isTokenBlacklisted) {
+            req.user = null
+            return next()
+        }
+
+        req.user = jwt.verify(token, process.env.JWT_SECRET)
+        return next()
+    } catch (err) {
+        return res.status(401).json({ message: "Invalid token." })
+    }
+}
+
+
+module.exports = { authUser, authUserOptional }

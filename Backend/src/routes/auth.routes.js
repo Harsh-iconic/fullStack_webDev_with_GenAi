@@ -31,9 +31,9 @@ authRouter.get("/logout", authController.logoutUserController)
 /**
  * @route GET /api/auth/get-me
  * @description get the current logged in user details
- * @access private
+ * @access public (returns user: null when no session exists)
  */
-authRouter.get("/get-me", authMiddleware.authUser, authController.getMeController)
+authRouter.get("/get-me", authMiddleware.authUserOptional, authController.getMeController)
 
 
 module.exports = authRouter
