@@ -51,17 +51,16 @@ export async function logout() {
     }
 }
 
-
-let getMeRequest
-
 export async function getMe() {
-    if (getMeRequest) return getMeRequest
 
-    getMeRequest = api.get("/api/auth/get-me")
-        .then((response) => response.data)
-        .finally(() => {
-            getMeRequest = null
-        })
+    try {
 
-    return getMeRequest
+        const response = await api.get("/api/auth/get-me")
+
+        return response.data
+
+    } catch (err) {
+        console.log(err)
+    }
+
 }
